@@ -1,12 +1,17 @@
 package com.paulo.myweatherchallenge.ui.home
 
+import android.location.Location
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.android.gms.common.api.ResolvableApiException
 import com.paulo.myweatherchallenge.R
 import com.paulo.myweatherchallenge.base.BaseViewModel
-import com.paulo.myweatherchallenge.model.weather.WeatherResponseBody
+import com.paulo.myweatherchallenge.helpers.gps.GpsHelper
+import com.paulo.myweatherchallenge.model.exception.LocationNotFoundException
+import com.paulo.myweatherchallenge.model.weather.WeatherGroupResponse
+import com.paulo.myweatherchallenge.model.weather.WeatherResponse
 import com.paulo.myweatherchallenge.repository.weather.WeatherRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import javax.inject.Inject
 
 /**
@@ -15,15 +20,51 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val mWeatherRepository: WeatherRepository
+    private val mWeatherRepository: WeatherRepository,
+    private val gpsHelper: GpsHelper
 ) : BaseViewModel() {
 
-    val ldWeather = MutableLiveData<WeatherResponseBody>()
+    val ldMylLocationLoading = MutableLiveData<Boolean>()
+    val ldWeatherLocation = MutableLiveData<WeatherResponse>()
+    val ldWeatherGroup = MutableLiveData<WeatherGroupResponse>()
 
-    fun getWeather() {
+    val alertGps: MutableLiveData<ResolvableApiException> = MutableLiveData()
+    val locationNotFound: MutableLiveData<Unit> = MutableLiveData()
+
+    fun fetchLocation() {
+        gpsHelper.fetchLastLocation(onLoadingChangeListener = { isLoading ->
+            ldMylLocationLoading.postValue(isLoading)
+        },
+            onErrorListener = { exception ->
+                when (exception) {
+                    is ResolvableApiException -> {
+                        alertGps.postValue(exception)
+                    }
+                    is LocationNotFoundException -> {
+                        locationNotFound.postValue(Unit)
+                    }
+                    else -> {
+                        //TODO implement a handlerException
+                    }
+                }
+            },
+            onSuccessListener = { location ->
+                getWeather(location)
+            }
+        )
+    }
+
+    private fun getWeather(location: Location) {
         defaultLaunch(R.string.error_on_get_weather) {
-            val responseBody = mWeatherRepository.getWeather(null, null, "LISBOA")
-            ldWeather.postValue(responseBody)
+            val responseBody = mWeatherRepository.getWeather(location.latitude, location.longitude)
+            ldWeatherLocation.postValue(responseBody)
+        }
+    }
+
+    fun getWeatherGroup() {
+        defaultLaunch(R.string.error_on_get_weather) {
+            val responseBody = mWeatherRepository.getWeatherGroup()
+            ldWeatherGroup.postValue(responseBody)
         }
     }
 }

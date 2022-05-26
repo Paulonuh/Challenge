@@ -8,5 +8,11 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
     <string name="error_on_get_weather">Failed, try again later</string>
+    <string name="temp">%sº</string>
+    <string name="temp_max_min">%sº/ %sº</string>
+    <string name="humidity">%s %%</string>
+    <string name="temp_feels_like">Feels like %sº</string>
+    <string name="review_your_location_permission">Review your location permission</string>
+    <string name="go_to_permissions">Go to permissions settings</string>
 
 </resources>

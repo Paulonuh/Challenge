@@ -18,6 +18,8 @@ class WeatherDetailFragment : BaseFragment<FragmentWeatherDetailBinding>() {
     override val bindingInflater: (LayoutInflater) -> FragmentWeatherDetailBinding
         get() = FragmentWeatherDetailBinding::inflate
 
+    override val spaceIdToTop: Int? = null
+
     override fun onInitViews() {
         binding.buttonSecond.setOnClickListener { popBackStack() }
     }

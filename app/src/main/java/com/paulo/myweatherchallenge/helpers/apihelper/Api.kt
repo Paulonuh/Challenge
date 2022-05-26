@@ -1,15 +1,15 @@
 package com.paulo.myweatherchallenge.helpers.apihelper
 
-import android.content.Context
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.paulo.myweatherchallenge.BuildConfig
-import com.paulo.myweatherchallenge.model.weather.WeatherResponseBody
+import com.paulo.myweatherchallenge.model.weather.WeatherGroupResponse
+import com.paulo.myweatherchallenge.model.weather.WeatherResponse
 import java.util.concurrent.TimeUnit
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
-import retrofit2.http.Path
 import retrofit2.http.Query
 
 
@@ -24,6 +24,15 @@ interface Api {
             val client = OkHttpClient.Builder()
                 .connectTimeout(20, TimeUnit.SECONDS)
                 .readTimeout(20, TimeUnit.SECONDS)
+
+            val interceptor = HttpLoggingInterceptor()
+            interceptor.level = if (BuildConfig.DEBUG)
+                HttpLoggingInterceptor.Level.BODY
+            else
+                HttpLoggingInterceptor.Level.NONE
+
+            client.addInterceptor(interceptor)
+                .build()
 
             val build = Retrofit.Builder()
                 .baseUrl(BuildConfig.BASE_URL)
@@ -42,11 +51,24 @@ interface Api {
         const val PATH_API_ID = "appid"
     }
 
-    @GET("$API_VERSION/weather")
+    @GET("$API_VERSION/weather?units=metric")
     suspend fun getWeatherByLocation(
         @Query("lat") lat: Double?,
         @Query("lon") long: Double?,
-        @Query("q") q: String?,
-        @Path(PATH_API_ID) appid: String
-    ): WeatherResponseBody
+        @Query(PATH_API_ID) appid: String
+    ): WeatherResponse
+
+    @GET("$API_VERSION/group?id=2267057,3117735,2988507,2950159,2618425,3169070,6058560,2964574,3067696,2761369&units=metric")
+    suspend fun getWeatherByGroup(@Query(PATH_API_ID) appid: String): WeatherGroupResponse
+
+//    2267057,
+//    3117735,
+//    2988507,
+//    2950159,
+//    2618425,
+//    3169070,
+//    6058560,
+//    2964574,
+//    3067696,
+//    2761369,
 }

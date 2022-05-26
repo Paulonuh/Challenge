@@ -1,9 +1,8 @@
 package com.paulo.myweatherchallenge.helpers.apihelper
 
-import android.content.Context
 import com.paulo.myweatherchallenge.BuildConfig
-import com.paulo.myweatherchallenge.model.weather.WeatherResponseBody
-import dagger.hilt.android.qualifiers.ApplicationContext
+import com.paulo.myweatherchallenge.model.weather.WeatherGroupResponse
+import com.paulo.myweatherchallenge.model.weather.WeatherResponse
 import javax.inject.Inject
 
 
@@ -14,7 +13,12 @@ import javax.inject.Inject
 class ApiHelper @Inject constructor() {
     private var mApi: Api = Api.Factory.create()
 
-    suspend fun getWeatherByLocation(lat: Double?, lon: Double?, q: String?): WeatherResponseBody {
-        return mApi.getWeatherByLocation(lat, lon, q, BuildConfig.TOKEN)
+    suspend fun getWeatherByLocation(lat: Double?, lon: Double?): WeatherResponse {
+        return mApi.getWeatherByLocation(lat, lon, BuildConfig.TOKEN)
+    }
+
+
+    suspend fun getWeatherByGroup(): WeatherGroupResponse {
+        return mApi.getWeatherByGroup(BuildConfig.TOKEN)
     }
 }
