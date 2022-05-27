@@ -63,7 +63,9 @@ class WeatherDetailFragment : BaseFragment<FragmentWeatherDetailBinding>() {
     private fun configDetail(detail: WeatherDetail?) {
         binding.apply {
             clDetail.isVisible = true
+            //todo convert to time based on timezone
             tvSunriseValue.text = detail?.current?.sunrise.toString()
+            //todo convert to time based on timezone
             tvSunsetValue.text = detail?.current?.sunset.toString()
             tvWindValue.text = detail?.current?.wind_speed.toString()
             tvUvValue.text = detail?.current?.uvi.toString()
