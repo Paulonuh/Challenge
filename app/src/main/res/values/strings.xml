@@ -17,7 +17,7 @@
     <string name="clear"> </string>
     <string name="city_temp">%s - %sº</string>
     <string name="sunrise">Sunrise</string>
-    <string name="wind">Wind</string>
+    <string name="wind">Wind Speed</string>
     <string name="sunset">Sunset</string>
     <string name="uv">UV Index</string>
 

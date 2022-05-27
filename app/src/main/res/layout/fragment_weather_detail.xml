@@ -34,6 +34,19 @@
             app:toolbarTitle=" "
             app:toolbarTitleColor="@color/white" />
 
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/ibBack"
+            android:padding="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:backgroundTint="@android:color/transparent"
+            android:src="@drawable/ic_back"
+            android:layout_marginStart="6dp"
+            app:layout_constraintBottom_toBottomOf="@id/toolbarHome"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/toolbarHome" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.card.MaterialCardView
@@ -41,7 +54,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/clTop"
-        app:shapeAppearanceOverlay="@style/ShapeAppearance.App.MediumComponent.Top">
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.App.MediumComponent.Bottom">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

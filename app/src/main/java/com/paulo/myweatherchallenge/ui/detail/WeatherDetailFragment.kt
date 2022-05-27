@@ -8,6 +8,7 @@ import com.paulo.myweatherchallenge.R
 import com.paulo.myweatherchallenge.base.BaseFragment
 import com.paulo.myweatherchallenge.databinding.FragmentWeatherDetailBinding
 import com.paulo.myweatherchallenge.extensions.loadImageCenter
+import com.paulo.myweatherchallenge.extensions.popBackStack
 import com.paulo.myweatherchallenge.model.weather.WeatherDetail
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,6 +28,7 @@ class WeatherDetailFragment : BaseFragment<FragmentWeatherDetailBinding>() {
     private val navArgs: WeatherDetailFragmentArgs by navArgs()
 
     override fun onInitViews() {
+        binding.ibBack.setOnClickListener { popBackStack() }
         navArgs.weatherData.name?.let { binding.toolbarHome.updateTitle(it) }
 
         binding.apply {
