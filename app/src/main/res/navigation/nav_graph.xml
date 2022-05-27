@@ -22,5 +22,8 @@
         android:label="@string/weather_detail_fragment_label"
         tools:layout="@layout/fragment_weather_detail">
 
+        <argument
+            android:name="weatherData"
+            app:argType="com.paulo.myweatherchallenge.model.weather.WeatherResponse" />
     </fragment>
 </navigation>

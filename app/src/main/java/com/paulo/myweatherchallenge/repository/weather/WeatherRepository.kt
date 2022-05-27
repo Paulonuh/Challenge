@@ -1,6 +1,7 @@
 package com.paulo.myweatherchallenge.repository.weather
 
 import com.paulo.myweatherchallenge.helpers.apihelper.ApiHelper
+import com.paulo.myweatherchallenge.model.weather.WeatherDetail
 import com.paulo.myweatherchallenge.model.weather.WeatherGroupResponse
 import com.paulo.myweatherchallenge.model.weather.WeatherResponse
 import javax.inject.Inject
@@ -20,5 +21,9 @@ class WeatherRepository @Inject constructor(
 
     suspend fun getWeatherGroup(): WeatherGroupResponse {
         return mApiHelper.getWeatherByGroup()
+    }
+
+    suspend fun fetchDetail(lat: Double?, lon: Double?): WeatherDetail {
+        return mApiHelper.fetchDetail(lat, lon)
     }
 }

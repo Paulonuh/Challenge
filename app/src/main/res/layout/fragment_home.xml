@@ -1,187 +1,241 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/mlHome"
-    app:layoutDescription="@xml/fragment_home_scene">
+    android:layout_height="match_parent">
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/ivCloudsTheme"
-        android:layout_width="0dp"
-        android:layout_height="220dp"
-        android:background="@drawable/bg_clear_clouds"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:shapeAppearanceOverlay="@style/ShapeAppearance.App.MediumComponent.Bottom" />
-
-    <Space
-        android:id="@+id/spaceTopHome"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.paulo.myweatherchallenge.widget.ToolbarView
-        android:id="@+id/toolbarHome"
-        android:layout_width="0dp"
-        android:layout_height="?attr/actionBarSize"
-        android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toTopOf="@id/cvMyLocationWeather"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/spaceTopHome"
-        app:toolbarTitle="@string/app_name"
-        app:toolbarTitleColor="@color/black" />
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cvMyLocationWeather"
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/mlHome"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:alpha="0.8"
-        app:layout_constraintBottom_toBottomOf="@id/ivCloudsTheme"
-        app:layout_constraintTop_toBottomOf="@id/ivCloudsTheme">
+        android:layout_height="match_parent"
+        app:layoutDescription="@xml/fragment_home_scene">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clTop"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimaryVariant"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/ivLocation"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="2dp"
-                android:tint="?attr/colorOnBackground"
-                app:layout_constraintBottom_toBottomOf="@id/tvCity"
+            <Space
+                android:id="@+id/spaceTopHome"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/tvCity"
-                tools:srcCompat="@drawable/ic_location" />
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvCity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
+            <com.paulo.myweatherchallenge.widget.ToolbarView
+                android:id="@+id/toolbarHome"
+                android:layout_width="0dp"
+                android:layout_height="?attr/actionBarSize"
                 android:layout_marginTop="16dp"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@id/ivLocation"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Lisboa" />
-
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/ivTemp"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginVertical="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@id/tvCity"
-                app:layout_constraintTop_toBottomOf="@id/tvMain"
-                tools:srcCompat="@drawable/ic_sun" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvTemp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="8dp"
-                android:layout_marginStart="16dp"
-                android:textSize="50sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/tvCity"
-                tools:text="19º" />
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/vHumidity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:backgroundTint="?attr/colorPrimaryVariant"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/tvCity"
-                app:shapeAppearanceOverlay="@style/ShapeAppearance.MaterialComponents.SmallComponent">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/ivHumidity"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="2dp"
-                        android:src="@drawable/ic_drop"
-                        android:tint="?attr/colorOnPrimary"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/tvHumidity"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginVertical="4dp"
-                        android:layout_marginEnd="6dp"
-                        android:textAlignment="center"
-                        android:textColor="?attr/colorOnPrimary"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="@id/ivHumidity"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/ivHumidity"
-                        app:layout_constraintTop_toTopOf="@id/ivHumidity"
-                        tools:text="68%" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvMaxAndMin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@id/vHumidity"
-                app:layout_constraintTop_toBottomOf="@id/vHumidity"
-                tools:text="19º/ 12º" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvFeelsLike"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@id/tvMaxAndMin"
-                app:layout_constraintTop_toBottomOf="@id/tvMaxAndMin"
-                tools:text="Feels Like 19º" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvMain"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/tvCity"
-                app:layout_constraintTop_toBottomOf="@id/tvCity"
-                tools:text="Clear" />
+                app:layout_constraintTop_toBottomOf="@id/spaceTopHome"
+                app:toolbarTitle=" "
+                app:toolbarTitleColor="@color/white" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.card.MaterialCardView>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvCitiesWeather"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cvMyLocationWeather"
-        tools:listitem="@layout/adapter_cities_weather" />
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivCloudsTheme"
+            android:layout_width="0dp"
+            android:layout_height="220dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bg_clear_clouds"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.App.MediumComponent.Bottom" />
 
-</androidx.constraintlayout.motion.widget.MotionLayout>
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/cvMyLocationWeather"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/clTop" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cvMyLocationWeather"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="0.9"
+            app:layout_constraintBottom_toBottomOf="@id/ivCloudsTheme"
+            app:layout_constraintTop_toBottomOf="@id/ivCloudsTheme"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.App.MediumComponent.Top">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivLocation"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="2dp"
+                    android:src="@drawable/ic_location"
+                    android:tint="?attr/colorOnBackground"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="@id/tvCity"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tvCity" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvCity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="16dp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@id/ivLocation"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Lisboa" />
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivTemp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginVertical="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/tvCity"
+                    app:layout_constraintTop_toBottomOf="@id/tvMain"
+                    tools:srcCompat="@drawable/ic_sun" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvTemp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="8dp"
+                    android:layout_marginStart="16dp"
+                    android:textSize="50sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tvCity"
+                    tools:text="19º" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/vHumidity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:backgroundTint="?attr/colorPrimaryVariant"
+                    android:orientation="horizontal"
+                    android:visibility="invisible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tvCity"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearance.MaterialComponents.SmallComponent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/ivHumidity"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="2dp"
+                            android:src="@drawable/ic_drop"
+                            android:tint="?attr/colorOnPrimary"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tvHumidity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginVertical="4dp"
+                            android:layout_marginEnd="6dp"
+                            android:textAlignment="center"
+                            android:textColor="?attr/colorOnPrimary"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="@id/ivHumidity"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/ivHumidity"
+                            app:layout_constraintTop_toTopOf="@id/ivHumidity"
+                            tools:text="68%" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvMaxAndMin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@id/vHumidity"
+                    app:layout_constraintTop_toBottomOf="@id/vHumidity"
+                    tools:text="19º/ 12º" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvFeelsLike"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@id/tvMaxAndMin"
+                    app:layout_constraintTop_toBottomOf="@id/tvMaxAndMin"
+                    tools:text="Feels Like 19º" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvMain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/tvCity"
+                    app:layout_constraintTop_toBottomOf="@id/tvCity"
+                    tools:text="Clear" />
+
+                <com.google.android.material.progressindicator.CircularProgressIndicator
+                    android:id="@+id/cpiMyLocationWeather"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:indeterminate="true"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:trackColor="@color/white"
+                    app:trackThickness="3dp" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvCitiesWeather"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/cvMyLocationWeather"
+            tools:listitem="@layout/adapter_cities_weather" />
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/cpiHomeList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:trackColor="@color/white"
+            app:trackThickness="3dp" />
+    </androidx.constraintlayout.motion.widget.MotionLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

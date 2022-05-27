@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.MyWeatherChallenge" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.MyWeatherChallenge" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
 
@@ -23,6 +23,10 @@
 
         <item name="android:windowBackground">@color/blue_dark_3</item>
         <item name="backgroundColor">@color/blue_dark_3</item>
+
+        <!-- Status bar color. -->
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
 
     </style>
 </resources>

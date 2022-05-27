@@ -2,6 +2,7 @@ package com.paulo.myweatherchallenge.helpers.apihelper
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.paulo.myweatherchallenge.BuildConfig
+import com.paulo.myweatherchallenge.model.weather.WeatherDetail
 import com.paulo.myweatherchallenge.model.weather.WeatherGroupResponse
 import com.paulo.myweatherchallenge.model.weather.WeatherResponse
 import java.util.concurrent.TimeUnit
@@ -61,14 +62,10 @@ interface Api {
     @GET("$API_VERSION/group?id=2267057,3117735,2988507,2950159,2618425,3169070,6058560,2964574,3067696,2761369&units=metric")
     suspend fun getWeatherByGroup(@Query(PATH_API_ID) appid: String): WeatherGroupResponse
 
-//    2267057,
-//    3117735,
-//    2988507,
-//    2950159,
-//    2618425,
-//    3169070,
-//    6058560,
-//    2964574,
-//    3067696,
-//    2761369,
+    @GET("$API_VERSION/onecall?exclude=hourly,daily,minutely?lang=pt_br")
+    suspend fun fetchDetail(
+        @Query("lat") lat: Double?,
+        @Query("lon") long: Double?,
+        @Query(PATH_API_ID) appid: String
+    ): WeatherDetail
 }

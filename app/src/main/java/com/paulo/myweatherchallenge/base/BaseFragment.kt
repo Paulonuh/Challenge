@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import com.paulo.myweatherchallenge.extensions.increaseMarginTop
 import com.paulo.myweatherchallenge.extensions.isAtLeastPie
+import com.paulo.myweatherchallenge.extensions.isAtLeastR
 
 
 /**
@@ -37,6 +38,12 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment(),
         get() = mViewBinding as VB
 
     abstract val spaceIdToTop: Int?
+    private var mIsLayoutCreated = false
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setFullScreen()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,28 +51,42 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment(),
         savedInstanceState: Bundle?
     ): View? {
         mViewBinding = bindingInflater.invoke(inflater)
+        onInitObservers()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        if (!mIsLayoutCreated) {
+            setNotchHeightToTopMargin()
 
-        viewModel?.messaging?.observe(viewLifecycleOwner) {
-            showError(it)
+            viewModel?.messaging?.observe(viewLifecycleOwner) {
+                showError(it)
+            }
+
+            viewModel?.loading?.observe(viewLifecycleOwner) { isLoading ->
+                onLoading(isLoading)
+            }
+
+            onFetchInitialData()
+            onInitViews()
+
+            mIsLayoutCreated = true
         }
-
-        viewModel?.loading?.observe(viewLifecycleOwner) { isLoading ->
-            onLoading(isLoading)
-        }
-
-        onFetchInitialData()
-        onInitViews()
-        onInitObservers()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         mViewBinding = null
+    }
+
+    protected fun setFullScreen() {
+        if (isAtLeastR()) {
+            activity?.window?.setDecorFitsSystemWindows(false)
+            view?.setPadding(0, 0, 0, 0)
+        } else {
+            activity?.window?.decorView?.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+        }
     }
 
     private fun setNotchHeightToTopMargin() {

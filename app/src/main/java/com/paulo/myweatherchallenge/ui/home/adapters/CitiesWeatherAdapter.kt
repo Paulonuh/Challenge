@@ -2,6 +2,7 @@ package com.paulo.myweatherchallenge.ui.home.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import com.paulo.myweatherchallenge.R
 import com.paulo.myweatherchallenge.base.BaseAdapter
 import com.paulo.myweatherchallenge.base.ViewHolder
@@ -36,16 +37,26 @@ class CitiesWeatherAdapter : BaseAdapter<AdapterCitiesWeatherBinding, WeatherRes
             tvMaxAndMin.text = holder.binding.tvMaxAndMin.context.getString(
                 R.string.temp_max_min,
                 data.main?.temp_max?.toInt().toString(),
-                data.main?.temp_max?.toInt().toString()
+                data.main?.temp_min?.toInt().toString()
             )
             tvHumidity.text =
                 holder.binding.tvHumidity.context.getString(R.string.humidity, data.main?.humidity.toString())
 
-            //TODO add more icons to represent all possibilities of weather
+            //TODO add more icons to represent more possibilities of weather
             when (data.weather?.get(0)?.main) {
                 "Clouds" -> ivTemp.loadImageCenter(R.drawable.ic_cloud)
                 else -> ivTemp.loadImageCenter(R.drawable.ic_sun)
             }
+
+            space.isVisible = itemCount == position + 1
+
+            cvCity.setOnClickListener { listener?.onCardClicked(data) }
         }
+    }
+
+    var listener: Listener? = null
+
+    interface Listener {
+        fun onCardClicked(data: WeatherResponse)
     }
 }

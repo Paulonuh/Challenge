@@ -25,6 +25,10 @@ fun isAtLeastPie(): Boolean {
     return Build.VERSION.SDK_INT >= Build.VERSION_CODES.P
 }
 
+fun isAtLeastR(): Boolean {
+    return Build.VERSION.SDK_INT >= Build.VERSION_CODES.R
+}
+
 fun Context.toastLong(text: CharSequence) = Toast.makeText(this, text, Toast.LENGTH_LONG).show()
 
 fun Context.toastLong(resId: Int) = Toast.makeText(this, resId, Toast.LENGTH_LONG).show()

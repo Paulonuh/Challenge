@@ -1,5 +1,13 @@
 package com.paulo.myweatherchallenge.model.weather
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+/**
+ * Created by Paulo Henrique Teixeira.
+ */
+
+@Parcelize
 data class WeatherResponse(
     var base: String?,
     var clouds: Clouds?,
@@ -14,4 +22,4 @@ data class WeatherResponse(
     var visibility: Int?,
     var weather: List<Weather>?,
     var wind: Wind?
-)
+) : Parcelable
